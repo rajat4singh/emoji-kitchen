@@ -43,11 +43,6 @@ export default function Kitchen() {
   );
   const [selectedMode, setSelectedMode] = useState("combine");
   const [combinationCopied, setCombinationCopied] = useState(false);
-  
-  // Set a title for the section
-  const sectionTitle = "Mix Your Emojis";
-  const sectionDescription = "Select two emojis below to create a unique combination!";
-
 
   // Downloading helpers
   const [bulkDownloadMenu, setBulkDownloadMenu] = useState<
@@ -475,29 +470,110 @@ export default function Kitchen() {
     }
   }
 
+  // Minimalistic Hero Section
+  // Hero Section Component
+  const HeroSection = () => (
+    <Box
+      sx={{
+        width: "100%",
+        py: 4,
+        mb: 3,
+        textAlign: "center",
+      }}
+    >
+      <Typography
+        variant="h3"
+        sx={{
+          fontWeight: 700,
+          letterSpacing: 1,
+          mb: 1,
+          fontFamily: "'Noto Emoji', 'Apple Color Emoji', sans-serif",
+        }}
+      >
+        Emoji Kitchen
+      </Typography>
+      <Typography
+        variant="subtitle1"
+        sx={{
+          color: "text.secondary",
+          fontWeight: 400,
+          fontSize: "1.1rem",
+        }}
+      >
+        Combine two emojis to create fun and unique emoji mashups!
+      </Typography>
+    </Box>
+  );
+
+  // Article Section Component
+  const ArticleSection = () => (
+    <Box
+      component="article"
+      sx={{
+        mt: { xs: 6, md: 12 },
+        mb: { xs: 4, md: 8 },
+        px: { xs: 2, md: 6 },
+        py: { xs: 4, md: 6 },
+        background: "linear-gradient(145deg, #ffffff 0%, #f8fafc 100%)",
+        borderRadius: 4,
+        boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
+        maxWidth: "1000px",
+        mx: "auto",
+      }}
+    >
+      <Typography 
+        variant="h4" 
+        sx={{ 
+          fontWeight: 700, 
+          mb: 3,
+          color: "#1f2937",
+          textAlign: "center"
+        }}
+      >
+        About the Emoji Kitchen Tool
+      </Typography>
+      
+      <Typography variant="body1" sx={{ mb: 2, color: "#4b5563" }}>
+        Welcome to Emoji Kitchen, where creativity meets expression! This innovative tool harnesses the power of Google's Emoji Kitchen technology to let you create unique emoji mashups that perfectly capture your mood, message, or moment.
+      </Typography>
+      
+      <Typography variant="body1" sx={{ mb: 2, color: "#4b5563" }}>
+        With our intuitive interface, you can easily select any two emojis and watch as they magically combine into something entirely new and often surprisingly delightful. Whether you're looking to add some flair to your social media posts, spice up your messages, or just explore the fun world of emoji combinations, our tool makes it simple and enjoyable.
+      </Typography>
+      
+      <Typography variant="body1" sx={{ mb: 2, color: "#4b5563" }}>
+        Features:
+        • Easy-to-use interface for selecting and combining emojis
+        • Instant preview of your emoji mashups
+        • One-click copying to clipboard
+        • Download options for sharing anywhere
+        • Random combination generator for unexpected fun
+      </Typography>
+      
+      <Typography variant="body1" sx={{ color: "#4b5563" }}>
+        Start experimenting with different emoji combinations today and discover the endless possibilities of creative expression. Whether you're a social media enthusiast, a digital artist, or just someone who loves emojis, the Emoji Kitchen tool is your playground for creating unique and expressive emoji mashups!
+      </Typography>
+    </Box>
+  );
+
   if (isMobile) {
     return (
       <Container
         maxWidth="xl"
         sx={{
-          width: "100%",
+          flexGrow: "1",
           display: "flex",
           flexDirection: "column",
-          position: "relative",
+          overflowY: "auto",
           mt: 1,
+          position: "relative",
           height: "100dvh",
           minWidth: "320px",
         }}
       >
-        {/* Section Title */}
-        <Box sx={{ textAlign: 'center', mb: 3, mt: 2 }}>
-          <Typography variant="h4" component="h2" sx={{ fontWeight: 700, mb: 1 }}>
-            {sectionTitle}
-          </Typography>
-          <Typography variant="body1" color="text.secondary">
-            {sectionDescription}
-          </Typography>
-        </Box>
+        {/* Minimalistic Hero Section */}
+        <HeroSection />
+
         {/* Entire Emoji Column */}
         <Box
           sx={{
@@ -795,30 +871,27 @@ export default function Kitchen() {
 
   return (
     <>
-      {/* Section Title */}
-      <Box sx={{ textAlign: 'center', mb: 4 }}>
-        <Typography variant="h4" component="h2" sx={{ fontWeight: 700, mb: 1 }}>
-          {sectionTitle}
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          {sectionDescription}
-        </Typography>
-      </Box>
-      
+      {/* Minimalistic Hero Section */}
+      <HeroSection />
+
       <Container
         maxWidth="xl"
         sx={{
-          width: "100%",
+          flexGrow: "1",
           display: "flex",
           flexDirection: "row",
           mt: 1,
           position: "relative",
+          minHeight: "calc(100vh - 100px)", // Only account for hero section
         }}
       >
+
       {/* Left Emoji Column */}
       <Box
         sx={{
+          overflowY: "auto",
           justifyItems: "center",
+          flexGrow: "1",
           width: "33%",
         }}
       >
@@ -845,8 +918,6 @@ export default function Kitchen() {
             [`& .${imageListItemClasses.root}`]: {
               display: "flex",
             },
-            height: "400px",
-            overflowY: "auto",
           }}
         >
           <LeftEmojiList
@@ -909,7 +980,9 @@ export default function Kitchen() {
       <Box
         sx={{
           mx: 3,
+          overflowY: "auto",
           justifyItems: "center",
+          flexGrow: "1",
           width: "33%",
           position: "relative",
           display: showOneCombo ? "flex" : null,
@@ -927,9 +1000,6 @@ export default function Kitchen() {
             [`& .${imageListItemClasses.root}`]: {
               display: "flex",
             },
-            height: showOneCombo ? "auto" : "400px",
-            overflowY: showOneCombo ? "visible" : "auto",
-            width: "100%",
           }}
         >
           {middleList}
@@ -958,7 +1028,9 @@ export default function Kitchen() {
       {/* Right Emoji Column */}
       <Box
         sx={{
+          overflowY: "auto",
           justifyItems: "center",
+          flexGrow: "1",
           width: "33%",
         }}
       >
@@ -986,8 +1058,6 @@ export default function Kitchen() {
             [`& .${imageListItemClasses.root}`]: {
               display: "flex",
             },
-            height: "400px",
-            overflowY: "auto",
           }}
         >
           <RightEmojiList
@@ -998,7 +1068,10 @@ export default function Kitchen() {
           />
         </Box>
       </Box>
-    </Container>
+      </Container>
+
+      {/* Article Section below the tool */}
+      <ArticleSection />
     </>
   );
 }
